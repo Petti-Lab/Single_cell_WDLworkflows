@@ -10,8 +10,8 @@ workflow scatter_rpca{
     String queue_name
     Int mem_gb
     File seurat_rpca_rscript
-	File inputSamplesFile
-	Array[Array[File]] inputSamples = read_tsv(inputSamplesFile)
+    File inputSamplesFile
+    Array[Array[File]] inputSamples = read_tsv(inputSamplesFile)
 	}
 
 	scatter (sample in inputSamples) {

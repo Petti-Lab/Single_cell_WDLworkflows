@@ -11,7 +11,7 @@ task run_singleR_immune_nonimmune {
     String Sample_name
     Float clustering_res
     Int nPC
-    String singleR_yaml
+    File singleR_yaml
   }
 
    command <<<

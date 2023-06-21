@@ -12,8 +12,8 @@ workflow scatter_gather_singleR{
     File singleR_singleref_rscript
     File merge_SingleR_in_seurat_script
     File seurat_rds
-	File inputSamplesFile
-	Array[Array[File]] inputSamples = read_tsv(inputSamplesFile)
+    File inputSamplesFile
+    Array[Array[File]] inputSamples = read_tsv(inputSamplesFile)
 	}
 
 	scatter (sample in inputSamples) {

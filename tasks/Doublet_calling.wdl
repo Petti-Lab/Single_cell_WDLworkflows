@@ -15,7 +15,8 @@ task run_doublet_collection{
   }
 
    command <<<
-    mkdir {Sample_name}/filtered_feature_bc_matrix
+    mkdir ~{Sample_name}
+    mkdir ~{Sample_name}/filtered_feature_bc_matrix
     cp ~{barcodes} ~{Sample_name}/filtered_feature_bc_matrix/
     cp ~{features} ~{Sample_name}/filtered_feature_bc_matrix/
     cp ~{matrix} ~{Sample_name}/filtered_feature_bc_matrix/
@@ -38,10 +39,6 @@ workflow Doublet_colletion{
   call run_doublet_collection
 }
 
-
-
-version 1.0
-
 task run_seurat_singlesample{
 
   input {
@@ -62,4 +59,3 @@ task run_seurat_singlesample{
     cp ~{features} {Sample_name}/filtered_feature_bc_matrix/
     cp ~{matrix} {Sample_name}/filtered_feature_bc_matrix/
     Rscript ~{seurat_singlesample_rscript} {Sample_name}/filtered_feature_bc_matrix/ ~{Sample_name}
-    >>>

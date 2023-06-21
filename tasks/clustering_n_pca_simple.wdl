@@ -11,7 +11,7 @@ task run_clustering_n_pca_simple{
     String Sample_name
     Float clustering_res
     Int nPC
-    String tirosh_file_path
+    File tirosh_file_path
   }
 
    command <<<

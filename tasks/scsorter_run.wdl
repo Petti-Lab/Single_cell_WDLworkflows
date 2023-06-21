@@ -9,7 +9,7 @@ task run_scsorter {
     File scsorter_script
     File rds_file_path
     String Sample_name
-    String marker_list_rds
+    File marker_list_rds
     String marker_list_name
   }
 

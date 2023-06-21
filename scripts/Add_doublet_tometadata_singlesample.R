@@ -39,7 +39,7 @@ doublet_object <- readRDS(doublet_file)
 
 add_doublet_predictions_to_seurat_singlesample <- function(seurat_object,doublet_object){
   # doublet_object[['doublet_results']] <- FindDoublets(score.list=doublet_object$doublet_scores,rate=0.08)
-  for(i in c("cxds","bcds","hybrid","scDblFinder","Scrublet","DoubletFinder")){
+  for(i in names(doublet_object$doublet_results)){
     sel_index <- doublet_object[['doublet_results']][[i]]
     doublet_cells <- doublet_object$cellnames[sel_index]
     non_doublet_cells <- setdiff(doublet_object$cellnames,doublet_cells)
@@ -53,7 +53,7 @@ add_doublet_predictions_to_seurat_singlesample <- function(seurat_object,doublet
     index <- match(Cells(seurat_object),names(sel_doublet_preds))
     seurat_object[[sprintf("doublet_results_%s",i)]] <- sel_doublet_preds[index]
   }
-  for(i in c("cxds","bcds","hybrid","scDblFinder","Scrublet","DoubletFinder")){
+  for(i in names(doublet_object$doublet_scores)){
     doubscores <- doublet_object[['doublet_scores']][[i]]
     names(doubscores) <- doublet_object$cellnames
     sel_cells <- intersect(Cells(seurat_object),names(doubscores))
@@ -110,7 +110,7 @@ All_doublet_preds <- seurat_object@meta.data[grep('doublet_results_',names(seura
 feature.pal = rev(colorRampPalette(brewer.pal(11,"Spectral"))(20))
 
 gplotlist = list()
-for(i in c(colnames(All_doublet_scores),'majority_doublet_predictions')){
+for(i in colnames(All_doublet_scores)){
   dm <-FeaturePlot(seurat_object,features =c(i),cols = feature.pal,label = T,pt.size = 0.8,label.size = 15)
   dm <- dm + theme(text = element_text(size = 22)) + theme(legend.title=element_text(color="black",size=20))+ theme(legend.text=element_text(size=20))+guides(fill = guide_legend(override.aes = list(size=15)),colour = guide_colourbar(barwidth =10,barheight=20))
   dm <- dm +theme(axis.text.y = element_text(color="black",size=22))+theme(axis.text.x = element_text(color="black",size=22))+theme(axis.title.x = element_text(color="black",size=22))+theme(axis.title.y = element_text(color="black",size=22))
@@ -127,9 +127,9 @@ doublet_cols <- c("darkred","grey88")
 names(doublet_cols) <- c("yes","no")
 
 gplotlist = list()
-for(i in colnames(All_doublet_preds)){
+for(i in c(colnames(All_doublet_preds),'majority_doublet_predictions')){
   Idents(seurat_object) <- i
-  mydmplt <-DimPlot(seurat_object,cols= doublet_cols,pt.size = 0.8,sacc) + ggtitle(i) + theme(plot.title = element_text(hjust = 0.5))
+  mydmplt <-DimPlot(seurat_object,cols= doublet_cols,pt.size = 0.8) + ggtitle(i) + theme(plot.title = element_text(hjust = 0.5))
   mydmplt <- mydmplt + theme(text = element_text(size = 22)) + theme(legend.title=element_text(color="black",size=20))+ theme(legend.text=element_text(size=20))+guides(fill = guide_legend(override.aes = list(size=15)))
   mydmplt <- mydmplt +theme(axis.text.y = element_text(color="black",size=22))+theme(axis.text.x = element_text(color="black",size=22))+theme(axis.title.x = element_text(color="black",size=22))+theme(axis.title.y = element_text(color="black",size=22))
   gplotlist[[i]] = mydmplt

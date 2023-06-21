@@ -1,5 +1,5 @@
-Novakowski	label.main	/storage1/fs1/allegra.petti/Active/SingleCellRepository/Novakowski_singleR_ref/Novakowski_etal_singelR.rds
-Brain_Immune_Atlas	label	/storage1/fs1/allegra.petti/Active/SingleCellRepository/Brain_immune_atlas/Human_GBM_fullaggregate/sce_obj_HumanNewlyDiagnGBM.jan2022.rds
-Han_etal	celltype	/storage1/fs1/allegra.petti/Active/SingleCellRepository/Han_etal/brain_atlas_han.RDS
-STAB	label	/storage1/fs1/allegra.petti/Active/SingleCellRepository/stab_singleR_ref/stab_aggr_ref.rds
-Human_cell_Atlas	Cell_types	/storage1/fs1/allegra.petti/Active/SingleCellRepository/HCA_bonemarrow/human_cell_atlas_SCE_lognorm.RDS
+Novakowski	label.main	gs://singler_references/Novakowski_etal_singelR.rds
+Brain_Immune_Atlas	label	gs://singler_references/sce_obj_HumanNewlyDiagnGBM.jan2022.rds	
+Han_etal	celltype	gs://singler_references/brain_atlas_han.RDS	
+STAB	label	gs://singler_references/stab_aggr_ref.rds
+Human_cell_Atlas	Cell_types	gs://singler_references/human_cell_atlas_SCE_lognorm.RDS	

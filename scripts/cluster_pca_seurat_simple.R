@@ -66,6 +66,31 @@ print("Saving scrna_GEX object after scTransform...");
 saveRDS(scrna_GEX, file = sprintf("%s.%s.VST.%s.rds", sample_name,control,date))
 print("Object saved.")
 
+# get_significant_pcs <- function(scrna_GEX) {
+#   control='Cycling'
+# #   if(length(unique(scrna_GEX$orig.ident))==1){
+# #     nPC=20 
+# #   }else{
+# #     nPC=50
+# #   }
+#   # print('Does the error happen inside get_significant_pcs?')
+#   scrna_GEX <- RunPCA(scrna_GEX, npcs = nPC, verbose = FALSE)
+#   scrna_GEX <- JackStraw(object = scrna_GEX, num.replicate = 100, dims=nPC)
+#   scrna_GEX <- ScoreJackStraw(object = scrna_GEX, dims = 1:nPC)
+#   jpeg(sprintf("PCA.jackstraw.%s.%s.jpg", control, date), width = 10, height = 6, units="in", res=300);
+#   js <- JackStrawPlot(object = scrna_GEX, dims = 1:nPC)
+#   print(js);
+#   dev.off();
+#   pc.pval <- scrna_GEX@reductions$pca@jackstraw@overall.p.values
+#   print(pc.pval);
+#   nPC=length( pc.pval[,'Score'][pc.pval[,'Score'] <= 0.001]) #using more stringent criteria of p-value <= 0.001
+#   # print('No the error does not happen inside get_significant_pcs!')
+#   #redefine nPCs based on number of significant prinicipal components in jackstraw plot
+#   return(nPC)
+# } #pipeline might break downstream as it expects same no of pcs and cluster resolution downstream (which needs to be changed to be more flexible)
+
+# nPC = get_significant_pcs(scrna_GEX = scrna_GEX)
+
 scrna_GEX <- RunPCA(object = scrna_GEX, npcs = nPC, verbose = FALSE);
 print("Saving scrna_GEX object...");
 saveRDS(scrna_GEX, file = sprintf("%s.%s.PCA.%s.rds", sample_name,control,date));
